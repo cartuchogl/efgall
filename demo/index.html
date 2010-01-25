@@ -1,0 +1,67 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN"
+  "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="es">
+  <head>
+    <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+    <title>Gallery</title>
+    <script src="./mootools.js" type="text/javascript" charset="utf-8"></script>
+    <script type="text/javascript" charset="utf-8">
+      // scripts
+      var visor;
+
+      function efgallReady() {
+        var src = $$('#galsrc a');
+        var ary = src.map(function(item,index) {
+          return [item.get('href'),item.get('text')];
+        });
+        document['flash_visor_swf'].loadGallery(ary);
+      }
+
+      window.addEvent('domready', function() {
+
+        if($('flash_visor')&&$('galsrc')) {
+          visor = new Swiff('efgall.swf', {
+              id: 'flash_visor_swf',
+              width: 480,
+              height: 480,
+              container: $('flash_visor'),
+              params: {
+                  wmode: 'opaque',
+                  bgcolor: '#000000',
+                  allowFullScreen:'true',
+                  allowScriptAccess:'always'
+              }
+          });
+          $('galsrc').setStyle('display','none');
+        }
+
+      });
+      
+    </script>
+  </head>
+  <body id="main">
+    
+    <div id="flash_visor"></div>
+
+    <ul id="galsrc">
+  
+        <li>
+          <a href="img1.png">Lorem author. Ipsum title. 2005</a>
+        </li>
+  
+        <li>
+          <a href="img2.png">Ipsum author. Lorem title. 1981</a>
+        </li>
+  
+        <li>
+          <a href="img3.png">Lorem author. Ipsum title. 2005</a>
+        </li>
+  
+        <li>
+          <a href="img4.png">Ipsum author. Lorem title. 1981</a>
+        </li>
+  
+    </ul>
+    
+  </body>
+</html>
