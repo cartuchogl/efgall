@@ -1,0 +1,20 @@
+Name: efgall
+  Simple Gallery in as3 with fullscren support
+
+License:
+  MIT
+
+Version:
+  0.1
+
+Copyright:
+  Copyright (c) 2010 [Carlos Bolaños](http://urbin.es).
+
+Dependencies:
+  - mootools with swiff
+
+Notes:
+  - Change flex path in Makefile and copy compiled efgall.swf in demo folder.
+  - See demo for usage.
+  - Easy run using webrick with server.rb script
+  - compiled in 10k
