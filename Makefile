@@ -1,6 +1,6 @@
 FLEX_SDK = ~/flex_sdk_3
 MXML = $(FLEX_SDK)/bin/mxmlc
-OUTPUT_PATH = .
+OUTPUT_PATH = ./demo
 DO = $(MXML) $< -output $@
 TARGET_FILENAME = efgall.swf
 
