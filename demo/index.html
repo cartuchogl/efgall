@@ -8,7 +8,8 @@
     <script type="text/javascript" charset="utf-8">
       // scripts
       var visor;
-
+      
+      // called from flash
       function efgallReady() {
         var src = $$('#galsrc a');
         var ary = src.map(function(item,index) {
@@ -18,7 +19,7 @@
       }
 
       window.addEvent('domready', function() {
-
+        // create gallery
         if($('flash_visor')&&$('galsrc')) {
           visor = new Swiff('efgall.swf', {
               id: 'flash_visor_swf',
