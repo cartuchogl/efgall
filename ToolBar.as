@@ -14,26 +14,26 @@ package {
     private var backgroundRect:Shape;
     
     [Embed(source="assets/next.png")] private static var _next:Class;
+    [Embed(source="assets/next_over.png")] private static var _next_over:Class;
     [Embed(source="assets/previous.png")] private static var _previous:Class;
+    [Embed(source="assets/previous_over.png")] private static var _previous_over:Class;
     
-    private var nextBtn:Sprite;
-    private var prevBtn:Sprite;
-    
+    private var nextBtn:OverButton;
+    private var prevBtn:OverButton;
 
     public function ToolBar() {
       addChild(backgroundRect = new Shape());
       addChild(fullBtn = new FullScreenButton());
       addChild(playBtn = new PlayPauseButton());
       
-      prevBtn = new Sprite();
-      prevBtn.addChild(new _previous());
+      prevBtn = new OverButton(_previous,_previous_over);
       addChild(prevBtn);
       prevBtn.addEventListener(MouseEvent.CLICK,function(e:Event):void {
         dispatchEvent(new Event('ON_PREV'));
       });
+
       
-      nextBtn = new Sprite();
-      nextBtn.addChild(new _next());
+      nextBtn = new OverButton(_next,_next_over);
       addChild(nextBtn);
       nextBtn.addEventListener(MouseEvent.CLICK,function(e:Event):void {
         dispatchEvent(new Event('ON_NEXT'));
