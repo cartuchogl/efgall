@@ -145,6 +145,12 @@ package {
       center();
       fitOr11();
     }
+
+    private function preload_image(url:String):void {
+      var loader:Loader = new Loader();
+      var request:URLRequest = new URLRequest(url);
+      loader.load(request);
+    }
     
     public function load_image(url:String):void {
       var loader:Loader = new Loader();
@@ -156,11 +162,13 @@ package {
         _label.setLabel(_images[_images_indx][1]);
         if(_toolbar.playing == true)
           myTimer.start();
+        if(_images[_images_indx+1]) {
+          preload_image(_images[_images_indx+1][0]);
+        }
       });
-      
       loader.contentLoaderInfo.addEventListener(ProgressEvent.PROGRESS, progressHandler);
-			var request:URLRequest = new URLRequest(url);
-			loader.load(request);
+      var request:URLRequest = new URLRequest(url);
+      loader.load(request);
     }
     
     private function progressHandler(event:ProgressEvent):void {
