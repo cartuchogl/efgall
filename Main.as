@@ -64,6 +64,7 @@ package {
       _toolbar.addEventListener('ON_PLAY_PAUSE',onPlayPause);
       
       ExternalInterface.addCallback("loadGallery",load_gallery); 
+      ExternalInterface.addCallback("goToPage",goToPage); 
       
       _timer_circular.value = 0;
       _bg_circular.value = 1;
@@ -91,7 +92,7 @@ package {
       _timer_circular.y = _bg_circular.y = _loader_circular.y = stage.stageHeight-64;
     }
     
-    private function goToPage(page:int):void {
+    public function goToPage(page:int):void {
       if(page>=_images.length) {
         page = 0;
       } else if(page<0) {
@@ -165,6 +166,10 @@ package {
         if(_images[_images_indx+1]) {
           preload_image(_images[_images_indx+1][0]);
         }
+        var u:URLRequest = new URLRequest(
+          "javascript:if(window['efgallLoadImage']){efgallLoadImage("+_images_indx+")}"
+        ); 
+        navigateToURL(u,"_self");
       });
       loader.contentLoaderInfo.addEventListener(ProgressEvent.PROGRESS, progressHandler);
       var request:URLRequest = new URLRequest(url);

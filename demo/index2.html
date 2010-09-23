@@ -1,0 +1,120 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN"
+  "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="es">
+  <head>
+    <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+    <title>Gallery</title>
+    <style type="text/css" media="screen">
+      #galsrc {
+        list-style: none;
+        margin: 0 15px 0 1px;
+        padding: 0;
+        float: left;
+      }
+      #galsrc span {
+        display:none;
+      }
+      #galsrc li a {
+        display:block;
+        width:64px;
+        height:64px;
+        border: 2px solid white;
+        margin: 0 0 2px 0;
+      }
+      #galsrc li a:hover {
+        border: 2px solid black;
+      }
+      #galsrc .selected, #galsrc li a.selected:hover {
+        border: 2px solid blue;
+      }
+      a img {
+        border:none;
+      }
+    </style>
+    <script src="./mootools.js" type="text/javascript" charset="utf-8"></script>
+    <script type="text/javascript" charset="utf-8">
+      // scripts
+      var visor;
+      
+      // called from flash
+      function efgallReady() {
+        var ary = $$('#galsrc a').map(function(item,index) {
+          return [item.get('href'),item.get('text')];
+        });
+        document['flash_visor_swf'].loadGallery(ary);
+      }
+      
+      // called from flash when image is show
+      function efgallLoadImage(indx) {
+        $$('#galsrc .selected').removeClass('selected');
+        $$('#galsrc a')[indx].addClass('selected');
+      }
+
+      window.addEvent('domready', function() {
+        // create gallery
+        if($('flash_visor')&&$('galsrc')) {
+          visor = new Swiff('efgall.swf', {
+              id: 'flash_visor_swf',
+              width: 480,
+              height: 488,
+              container: $('flash_visor'),
+              params: {
+                  wmode: 'opaque',
+                  bgcolor: '#000000',
+                  allowFullScreen:'true',
+                  allowScriptAccess:'always'
+              }
+          });
+          $$('#galsrc a').addEvent('click',function(e){
+              e.stop();
+              $$('#galsrc .selected').removeClass('selected');
+              var ele = $(e.target);
+              var parent = ele.getParent('a');
+              if(parent)
+                ele = parent;
+              ele.addClass('selected');
+              document['flash_visor_swf'].goToPage($$('#galsrc a').indexOf(ele))
+          });
+        }
+      });
+      
+    </script>
+  </head>
+  <body id="main">
+
+    <ul id="galsrc">
+  
+        <li>
+          <a href="img1.png"><img src="img1mini.png" /><span>Lorem author. Ipsum title. 2005</span></a>
+        </li>
+  
+        <li>
+          <a href="img2.png"><img src="img2mini.png" /><span>Ipsum author. Lorem title. 1981</span></a>
+        </li>
+  
+        <li>
+          <a href="img3.png"><img src="img3mini.png" /><span>Lorem author. Ipsum title. 2005</span></a>
+        </li>
+  
+        <li>
+          <a href="img4.png"><img src="img4mini.png" /><span>Ipsum author. Lorem title. 1981</span></a>
+        </li>
+        
+        <li>
+          <a href="img1.png"><img src="img1mini.png" /><span>Lorem author. Ipsum title. 2005</span></a>
+        </li>
+  
+        <li>
+          <a href="img2.png"><img src="img2mini.png" /><span>Ipsum author. Lorem title. 1981</span></a>
+        </li>
+  
+        <li>
+          <a href="img3.png"><img src="img3mini.png" /><span>Lorem author. Ipsum title. 2005</span></a>
+        </li>
+  
+    </ul>
+
+    <div id="flash_visor"></div>
+
+  </body>
+</html>
