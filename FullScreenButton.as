@@ -17,11 +17,11 @@ package {
     
     private function onClick(event:MouseEvent):void {
       if(stage.displayState == StageDisplayState.FULL_SCREEN) {
-				stage.displayState = StageDisplayState.NORMAL;
-			} else {
-				stage.displayState = StageDisplayState.FULL_SCREEN;
-			}
-    }        
+        stage.displayState = StageDisplayState.NORMAL;
+      } else {
+        stage.displayState = StageDisplayState.FULL_SCREEN;
+      }
+    }
   }
   
 }
