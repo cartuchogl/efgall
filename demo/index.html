@@ -11,8 +11,7 @@
       
       // called from flash
       function efgallReady() {
-        var src = $$('#galsrc a');
-        var ary = src.map(function(item,index) {
+        var ary = $$('#galsrc a').map(function(item,index) {
           return [item.get('href'),item.get('text')];
         });
         document['flash_visor_swf'].loadGallery(ary);
