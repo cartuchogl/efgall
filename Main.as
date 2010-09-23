@@ -185,13 +185,14 @@ package {
 /*      _label.setLabel('Loading. '+event.bytesLoaded+'/'+event.bytesTotal+' bytes');*/
     }
     
-    public function load_gallery(images:Array):void {
+    public function load_gallery(images:Array,auto_play:Boolean=true):void {
       _images = images;
-      launchGal();
+      launchGal(auto_play);
     }
     
-    private function launchGal():void {
-      _toolbar.playing = true;
+    private function launchGal(auto_play:Boolean):void {
+      if(auto_play)
+        _toolbar.playing = true;
       goToPage(0);
     }
     
