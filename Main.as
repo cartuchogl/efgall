@@ -77,8 +77,8 @@ package {
       myTimer.addEventListener(TimerEvent.TIMER_COMPLETE, function(event:TimerEvent):void {
           _timer_circular.value = 0;
           _bg_circular.value = 1;
-          onNext(null);
           myTimer.reset();
+          onNext(null);
       });
       
       var u:URLRequest = new URLRequest("javascript:efgallReady()"); 
@@ -98,7 +98,22 @@ package {
       } else if(page<0) {
         page = _images.length-1;
       }
-      load_image(_images[page][0]);
+      if(_images[page][2]) {
+        _loader_circular.value = 0;
+        _background.bitmapData = _images[page][2].content.bitmapData;
+        _background.smoothing = true;
+        fitOr11();
+        _label.setLabel(_images[page][1]);
+        if(_toolbar.playing == true) {
+          myTimer.start();
+        }
+        var u:URLRequest = new URLRequest(
+          "javascript:if(window['efgallLoadImage']){efgallLoadImage("+page+")}"
+        ); 
+        navigateToURL(u,"_self");
+      } else {
+        load_image(_images[page][0]);
+      }
 /*      _label.setLabel(_images[page][1]);*/
       _images_indx = page;
     }
@@ -156,6 +171,7 @@ package {
     public function load_image(url:String):void {
       var loader:Loader = new Loader();
       loader.contentLoaderInfo.addEventListener(Event.COMPLETE, function(e:Event):void {
+        _images[_images_indx][2] = e.target;
         _loader_circular.value = 0;
         _background.bitmapData = e.target.content.bitmapData;
         _background.smoothing = true;
