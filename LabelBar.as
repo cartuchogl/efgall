@@ -13,7 +13,7 @@ package {
   public class LabelBar extends Sprite {
     
     private var label:TextField;
-    private var labelText:String = "Hello world and welcome to the show.";
+    private var labelText:String = "Loading...";
     
     private var backgroundRect:Shape;
 
